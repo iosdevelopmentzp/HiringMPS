@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Coordinators
+import HiringApp
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

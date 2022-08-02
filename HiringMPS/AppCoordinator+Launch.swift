@@ -5,7 +5,7 @@
 //  Created by Dmytro Vorko on 02.08.2022.
 //
 
-import Coordinators
+import HiringApp
 import UIKit
 
 extension AppCoordinator {

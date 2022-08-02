@@ -14,8 +14,8 @@
 		3BAB89062899916D00EB3EA3 /* HiringMPSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89052899916D00EB3EA3 /* HiringMPSTests.swift */; };
 		3BAB89102899916D00EB3EA3 /* HiringMPSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */; };
 		3BAB89122899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */; };
-		3BAB892328999A6400EB3EA3 /* Coordinators in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892228999A6400EB3EA3 /* Coordinators */; };
 		3BAB89252899B27100EB3EA3 /* AppCoordinator+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89242899B27100EB3EA3 /* AppCoordinator+Launch.swift */; };
+		3BAB892C2899CE6500EB3EA3 /* HiringApp in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892B2899CE6500EB3EA3 /* HiringApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BAB892328999A6400EB3EA3 /* Coordinators in Frameworks */,
+				3BAB892C2899CE6500EB3EA3 /* HiringApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +169,7 @@
 			);
 			name = HiringMPS;
 			packageProductDependencies = (
-				3BAB892228999A6400EB3EA3 /* Coordinators */,
+				3BAB892B2899CE6500EB3EA3 /* HiringApp */,
 			);
 			productName = HiringMPS;
 			productReference = 3BAB88EB2899916100EB3EA3 /* HiringMPS.app */;
@@ -243,6 +243,8 @@
 				Base,
 			);
 			mainGroup = 3BAB88E22899916000EB3EA3;
+			packageReferences = (
+			);
 			productRefGroup = 3BAB88EC2899916100EB3EA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -385,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -439,7 +441,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -464,7 +466,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -493,7 +495,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -625,9 +627,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3BAB892228999A6400EB3EA3 /* Coordinators */ = {
+		3BAB892B2899CE6500EB3EA3 /* HiringApp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Coordinators;
+			productName = HiringApp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
