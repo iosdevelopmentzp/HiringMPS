@@ -14,6 +14,7 @@
 		3BAB89062899916D00EB3EA3 /* HiringMPSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89052899916D00EB3EA3 /* HiringMPSTests.swift */; };
 		3BAB89102899916D00EB3EA3 /* HiringMPSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */; };
 		3BAB89122899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */; };
+		3BAB892328999A6400EB3EA3 /* Coordinators in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892228999A6400EB3EA3 /* Coordinators */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BAB892328999A6400EB3EA3 /* Coordinators in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +83,7 @@
 				3BAB89042899916D00EB3EA3 /* HiringMPSTests */,
 				3BAB890E2899916D00EB3EA3 /* HiringMPSUITests */,
 				3BAB88EC2899916100EB3EA3 /* Products */,
+				3BAB892128999A6400EB3EA3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +142,13 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		3BAB892128999A6400EB3EA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,6 +165,9 @@
 			dependencies = (
 			);
 			name = HiringMPS;
+			packageProductDependencies = (
+				3BAB892228999A6400EB3EA3 /* Coordinators */,
+			);
 			productName = HiringMPS;
 			productReference = 3BAB88EB2899916100EB3EA3 /* HiringMPS.app */;
 			productType = "com.apple.product-type.application";
@@ -602,6 +615,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3BAB892228999A6400EB3EA3 /* Coordinators */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Coordinators;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3BAB88E32899916000EB3EA3 /* Project object */;
 }
