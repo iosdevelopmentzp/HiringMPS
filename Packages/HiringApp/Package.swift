@@ -9,6 +9,7 @@ let package = Package(
     products: [
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Networking", targets: ["Networking"]),
+        .library(name: "UseCases", targets: ["UseCases"]),
         .library(name: "HiringApp", targets: ["HiringApp"])
     ],
     dependencies: [
@@ -32,11 +33,13 @@ let package = Package(
             "RxAlamofire"
         ]),
         
-        .target(name: "HiringApp", dependencies: [
-            "Core",
+        .target(name: "UseCases", dependencies: [
             "Networking",
+            "Core",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
-        ])
+        ]),
+        
+        .target(name: "HiringApp", dependencies: [])
     ]
 )
