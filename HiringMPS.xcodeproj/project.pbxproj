@@ -45,6 +45,7 @@
 		3BAB890B2899916D00EB3EA3 /* HiringMPSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HiringMPSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiringMPSUITests.swift; sourceTree = "<group>"; };
 		3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiringMPSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3BAB89202899965200EB3EA3 /* HiringApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HiringApp; path = Packages/HiringApp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		3BAB88E22899916000EB3EA3 = {
 			isa = PBXGroup;
 			children = (
+				3BAB891F2899965200EB3EA3 /* Packages */,
 				3BAB88ED2899916100EB3EA3 /* HiringMPS */,
 				3BAB89042899916D00EB3EA3 /* HiringMPSTests */,
 				3BAB890E2899916D00EB3EA3 /* HiringMPSUITests */,
@@ -127,6 +129,14 @@
 				3BAB88FC2899916C00EB3EA3 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3BAB891F2899965200EB3EA3 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				3BAB89202899965200EB3EA3 /* HiringApp */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
