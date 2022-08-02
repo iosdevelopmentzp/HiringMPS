@@ -7,11 +7,15 @@
 
 import UIKit
 import MVVM
+import Extensions
+import SnapKit
 
-public class RoomsViewController: UIViewController {
+public class RoomsViewController: UIViewController, View, ViewSettableType {
     // MARK: - Properties
     
     public let viewModel: RoomsViewModel
+    
+    private let tableView = UITableView()
     
     // MARK: - Constructor
     
@@ -29,13 +33,25 @@ public class RoomsViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupOutput()
-        self.view.backgroundColor = UIColor.red
+        performSetupViews()
     }
-}
-
-// MARK: - View
-
-extension RoomsViewController: View {
+    
+    // MARK: - Setup
+    
+    public func setupViews() {
+        tableView.backgroundColor = .red
+    }
+    
+    public func addViews() {
+        view.addSubview(tableView)
+    }
+    
+    public func layoutViews() {
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(self.view.safeAreaInsets)
+        }
+    }
+    
     public func setupOutput() {
         let input = viewModel.bind(input: .init())
         setupInput(input)

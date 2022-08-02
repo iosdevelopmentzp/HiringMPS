@@ -7,6 +7,7 @@ let package = Package(
     name: "HiringApp",
     platforms: [.iOS(.v13)],
     products: [
+        .library(name: "Extensions", targets: ["Extensions"]),
         .library(name: "MVVM", targets: ["MVVM"]),
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Networking", targets: ["Networking"]),
@@ -31,6 +32,8 @@ let package = Package(
                  exact: "6.1.2")
     ],
     targets: [
+        .target(name: "Extensions"),
+        
         .target(name: "MVVM"),
         
         .target(name: "Core"),
@@ -70,6 +73,8 @@ let package = Package(
             "UseCases",
             "Core",
             "MVVM",
+            "Extensions",
+            "SnapKit",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ])
