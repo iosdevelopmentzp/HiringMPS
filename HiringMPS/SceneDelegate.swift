@@ -10,17 +10,16 @@ import Coordinators
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    var window: UIWindow?
-    private var appCoordinator: AppCoordinator?
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        self.window = window
-        let appCoordinator = AppCoordinator(window: window)
-        self.appCoordinator = appCoordinator
+        let appCoordinator = AppCoordinator.launch(with: window)
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.window = window
+        appDelegate?.appCoordinator = appCoordinator
+        
         appCoordinator.start()
     }
 }

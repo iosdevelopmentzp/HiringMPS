@@ -15,6 +15,7 @@
 		3BAB89102899916D00EB3EA3 /* HiringMPSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */; };
 		3BAB89122899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */; };
 		3BAB892328999A6400EB3EA3 /* Coordinators in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892228999A6400EB3EA3 /* Coordinators */; };
+		3BAB89252899B27100EB3EA3 /* AppCoordinator+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89242899B27100EB3EA3 /* AppCoordinator+Launch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiringMPSUITests.swift; sourceTree = "<group>"; };
 		3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiringMPSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3BAB89202899965200EB3EA3 /* HiringApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HiringApp; path = Packages/HiringApp; sourceTree = "<group>"; };
+		3BAB89242899B27100EB3EA3 /* AppCoordinator+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+Launch.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				3BAB88EE2899916100EB3EA3 /* AppDelegate.swift */,
 				3BAB88F02899916100EB3EA3 /* SceneDelegate.swift */,
+				3BAB89242899B27100EB3EA3 /* AppCoordinator+Launch.swift */,
 				3BAB891E2899918600EB3EA3 /* Resources */,
 			);
 			path = HiringMPS;
@@ -284,6 +287,7 @@
 			files = (
 				3BAB88EF2899916100EB3EA3 /* AppDelegate.swift in Sources */,
 				3BAB88F12899916100EB3EA3 /* SceneDelegate.swift in Sources */,
+				3BAB89252899B27100EB3EA3 /* AppCoordinator+Launch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
