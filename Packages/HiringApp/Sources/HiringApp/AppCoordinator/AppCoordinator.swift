@@ -7,20 +7,20 @@
 
 import Foundation
 import UIKit
-//import DependencyResolver
+import DependencyResolver
 
 public final class AppCoordinator: NavigationCoordinator {
     // MARK: - Properties
     
     private let window: UIWindow
     
-    //private let resolver: DependencyResolverProtocol
+    private let resolver: DependencyResolverProtocol
     
     // MARK: - Constructor
     
-    public init(window: UIWindow/*, resolver: DependencyResolverProtocol*/) {
+    public init(window: UIWindow, resolver: DependencyResolverProtocol) {
         self.window = window
-        //self.resolver = resolver
+        self.resolver = resolver
         let navigationController = UINavigationController()
         navigationController.view.backgroundColor = .white
         super.init(navigation: navigationController)

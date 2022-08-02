@@ -10,7 +10,9 @@ let package = Package(
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Networking", targets: ["Networking"]),
         .library(name: "UseCases", targets: ["UseCases"]),
-        .library(name: "HiringApp", targets: ["HiringApp"])
+        .library(name: "Assemblies", targets: ["Assemblies"]),
+        .library(name: "DependencyResolver", targets: ["DependencyResolver"]),
+        .library(name: "HiringApp", targets: ["HiringApp"]),
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
@@ -40,6 +42,18 @@ let package = Package(
             .product(name: "RxCocoa", package: "RxSwift")
         ]),
         
-        .target(name: "HiringApp", dependencies: [])
+        .target(name: "Assemblies", dependencies: [
+            "Swinject",
+            "Networking",
+            "UseCases"
+        ]),
+        
+        .target(name: "DependencyResolver", dependencies: [
+            "Swinject"
+        ]),
+        
+        .target(name: "HiringApp", dependencies: [
+            "DependencyResolver"
+        ])
     ]
 )
