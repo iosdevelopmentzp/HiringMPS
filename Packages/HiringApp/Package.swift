@@ -7,12 +7,17 @@ let package = Package(
     name: "HiringApp",
     platforms: [.iOS(.v13)],
     products: [
+        .library(name: "MVVM", targets: ["MVVM"]),
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Networking", targets: ["Networking"]),
         .library(name: "UseCases", targets: ["UseCases"]),
         .library(name: "Assemblies", targets: ["Assemblies"]),
         .library(name: "DependencyResolver", targets: ["DependencyResolver"]),
         .library(name: "HiringApp", targets: ["HiringApp"]),
+        
+        // scenes
+        
+        .library(name: "SceneRooms", targets: ["SceneRooms"]),
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
@@ -26,6 +31,8 @@ let package = Package(
                  exact: "6.1.2")
     ],
     targets: [
+        .target(name: "MVVM"),
+        
         .target(name: "Core"),
         
         .target(name: "Networking", dependencies: [
@@ -53,7 +60,18 @@ let package = Package(
         ]),
         
         .target(name: "HiringApp", dependencies: [
-            "DependencyResolver"
+            "DependencyResolver",
+            "SceneRooms"
+        ]),
+        
+        // scenes
+        
+        .target(name: "SceneRooms", dependencies: [
+            "UseCases",
+            "Core",
+            "MVVM",
+            .product(name: "RxSwift", package: "RxSwift"),
+            .product(name: "RxCocoa", package: "RxSwift")
         ])
     ]
 )

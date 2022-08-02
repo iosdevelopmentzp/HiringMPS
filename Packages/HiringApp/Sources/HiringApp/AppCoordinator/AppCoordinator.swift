@@ -30,12 +30,9 @@ public final class AppCoordinator: NavigationCoordinator {
     
     public override func start() {
         window.rootViewController = navigation
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = UIColor.blue
-        navigation.pushViewController(viewController, animated: true)
-//        let launches = LaunchesCoordinator(navigation: navigation, resolver: resolver)
-//        addChild(launches)
-//        launches.start()
+        let roomsCoordinator = RoomsCoordinator(resolver, navigation: navigation)
+        addChild(roomsCoordinator)
+        roomsCoordinator.start()
         window.makeKeyAndVisible()
     }
 }
