@@ -30,9 +30,9 @@ public final class AppCoordinator: NavigationCoordinator {
     
     public override func start() {
         window.rootViewController = navigation
-        let roomsCoordinator = PeopleCoordinator(resolver, navigation: navigation)
-        addChild(roomsCoordinator)
-        roomsCoordinator.start()
+        let tabBarCoordinator = TabBarCoordinator(resolver, navigation: navigation)
+        addChild(tabBarCoordinator)
+        tabBarCoordinator.start()
         window.makeKeyAndVisible()
     }
 }
