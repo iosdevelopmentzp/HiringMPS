@@ -9,8 +9,12 @@ import UIKit
 import DependencyResolver
 
 final class TabBarCoordinator: NavigationCoordinator {
+    // MARK: - Properties
+    
     private let tabBarController: UITabBarController
     private let resolver: DependencyResolverProtocol
+    
+    // MARK: - Constructor
     
     init(_ resolver: DependencyResolverProtocol, navigation: UINavigationController) {
         tabBarController = UITabBarController()
@@ -18,19 +22,70 @@ final class TabBarCoordinator: NavigationCoordinator {
         super.init(navigation: navigation)
     }
     
+    // MARK: - Start
+    
     override func start() {
-        let peopleNavigation = UINavigationController()
-        let peopleCoordinator = PeopleCoordinator(resolver, navigation: peopleNavigation)
-        addChild(peopleCoordinator)
-        peopleCoordinator.start()
-        
-        let roomsNavigation = UINavigationController()
-        let roomsCoordinator = RoomsCoordinator(resolver, navigation: roomsNavigation)
-        addChild(roomsCoordinator)
-        roomsCoordinator.start()
-        
-        tabBarController.viewControllers = [peopleNavigation, roomsNavigation]
+        tabBarController.viewControllers = makeTabViewControllers()
         
         navigation.pushViewController(tabBarController, animated: false)
+    }
+}
+
+// MARK: - Private
+
+private extension TabBarCoordinator {
+    enum TabType: CaseIterable {
+        case people
+        case rooms
+        
+        var tag: Int {
+            guard let index = TabType.allCases.firstIndex(of: self) else {
+                fatalError("Unexpected behaviour")
+            }
+            return index
+        }
+    }
+    
+    private func makeTabViewControllers()  -> [UIViewController] {
+        TabType.allCases.map {
+            let navigation = UINavigationController()
+            let coordinator = self.coordinator(for: $0, navigation: navigation)
+            coordinator.start()
+            navigation.viewControllers.first?.tabBarItem = tabItem(for: $0)
+            return navigation.viewControllers.first
+        }
+        .compactMap { $0 }
+    }
+    
+    private func tabItem(for tabType: TabType) -> UITabBarItem {
+        let title: String
+        switch tabType {
+        case .people:
+            title = "People"
+
+        case .rooms:
+            title = "Rooms"
+        }
+        
+        let item = UITabBarItem(title: title, image: .init(), tag: tabType.tag)
+        item.setTitleTextAttributes(
+            [
+                .font: UIFont.systemFont(ofSize: 17),
+                .foregroundColor: UIColor.red
+            ],
+            for: .normal
+        )
+        
+        return item
+    }
+    
+    private func coordinator(for tabType: TabType, navigation: UINavigationController) -> CoordinatorProtocol {
+        switch tabType {
+        case .people:
+            return PeopleCoordinator(resolver, navigation: navigation)
+        
+        case .rooms:
+            return RoomsCoordinator(resolver, navigation: navigation)
+        }
     }
 }
