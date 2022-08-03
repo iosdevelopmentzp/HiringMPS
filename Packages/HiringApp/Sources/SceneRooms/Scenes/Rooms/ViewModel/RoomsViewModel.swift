@@ -15,6 +15,7 @@ public struct RoomsViewModel: ViewModel {
     // MARK: - Nested
     
     public struct Input {
+        let viewWillAppearEvent: ControlEvent<Void>
         let reloadTapEvent: ControlEvent<Void>
         let disposeBag: DisposeBag
     }
@@ -40,8 +41,13 @@ public struct RoomsViewModel: ViewModel {
     // MARK: - Bind
     
     public func transform(_ input: Input, outputHandler: @escaping (Output) -> Void) {
+        let loadSignal = Observable.merge([
+            input.reloadTapEvent.asObservable(),
+            input.viewWillAppearEvent.take(1)
+        ])
+        
         input.disposeBag.insert([
-            setupLoadObserving(with: Observable.merge([input.reloadTapEvent.asObservable(), .just(())]))
+            setupLoadObserving(with: loadSignal)
         ])
         
         outputHandler(

@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import SharedViews
+import RxExtensions
 
 public class RoomsViewController: UIViewController, View, ViewSettableType {
     // MARK: - Nested
@@ -87,6 +88,7 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     
     public func setupOutput() {
         let input = RoomsViewModel.Input(
+            viewWillAppearEvent: rx.viewWillAppear,
             reloadTapEvent: ControlEvent(events: retrySubject),
             disposeBag: disposeBag
         )

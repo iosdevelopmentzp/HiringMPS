@@ -8,6 +8,7 @@ let package = Package(
     platforms: [.iOS(.v11)],
     products: [
         .library(name: "Extensions", targets: ["Extensions"]),
+        .library(name: "RxExtensions", targets: ["RxExtensions"]),
         .library(name: "MVVM", targets: ["MVVM"]),
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Networking", targets: ["Networking"]),
@@ -35,6 +36,11 @@ let package = Package(
     ],
     targets: [
         .target(name: "Extensions"),
+        
+        .target(name: "RxExtensions", dependencies: [
+            .product(name: "RxSwift", package: "RxSwift"),
+            .product(name: "RxCocoa", package: "RxSwift")
+        ]),
         
         .target(name: "MVVM"),
         
@@ -84,6 +90,7 @@ let package = Package(
             "SnapKit",
             "RxDataSources",
             "SharedViews",
+            "RxExtensions",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ])
