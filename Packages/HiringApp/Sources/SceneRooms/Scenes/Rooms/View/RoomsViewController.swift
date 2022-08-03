@@ -9,16 +9,34 @@ import UIKit
 import MVVM
 import Extensions
 import SnapKit
+import RxSwift
+import RxCocoa
 import RxDataSources
 import SharedViews
 
 public class RoomsViewController: UIViewController, View, ViewSettableType {
+    // MARK: - Nested
+    
+    private enum LayoutMode: Equatable {
+        case singleColumn
+        case dualColumn
+    }
+    
     // MARK: - Properties
     
     public let viewModel: RoomsViewModel
     
+    private let disposeBag = DisposeBag()
+    
     private let viewLayout = UICollectionViewFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
+    
+    private var layoutMode: LayoutMode = .singleColumn {
+        didSet {
+            guard layoutMode != oldValue else { return }
+            recalculateLayout()
+        }
+    }
     
     // MARK: - Constructor
     
@@ -35,17 +53,23 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setupOutput()
         performSetupViews()
+        setupOutput()
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        recalculateLayout()
     }
     
     // MARK: - Setup
     
     public func setupViews() {
-        collectionView.backgroundColor = .red
         collectionView.registerCellClass(RoomCell.self)
         collectionView.registerCellClass(LoadingCell.self)
         collectionView.registerCellClass(ErrorCell.self)
+        
+        viewLayout.scrollDirection = .vertical
     }
     
     public func addViews() {
@@ -64,11 +88,51 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     }
     
     public func setupInput(_ input: RoomsViewModel.Output) {
-        
+        disposeBag.insert([
+            setupDataSourceObserving(with: input.stateObservable)
+        ])
     }
 }
 
 // MARK: - Private Functions
+
+private extension RoomsViewController {
+    private func setupDataSourceObserving(with input: Driver<RoomsState>) -> Disposable {
+        input
+            .map(RoomsSection.Factory.make(_:))
+            .drive(collectionView.rx.items(dataSource: dataSource()))
+    }
+    
+    private func recalculateLayout() {
+        let itemWidth: CGFloat
+        let itemSpace: CGFloat
+        let lineSpace: CGFloat = 10
+        
+        switch layoutMode {
+        case .singleColumn:
+            itemWidth = collectionView.bounds.width
+            itemSpace = 0
+            
+        case .dualColumn:
+            itemSpace = 10
+            itemWidth = (collectionView.bounds.width / 2) - itemSpace
+        }
+        
+        let newItemSize = CGSize(width: itemWidth, height: 10)
+        
+        guard viewLayout.itemSize != newItemSize ||
+                viewLayout.minimumInteritemSpacing != itemSpace ||
+                viewLayout.minimumLineSpacing != lineSpace else {
+            return
+        }
+        viewLayout.estimatedItemSize = newItemSize
+        viewLayout.minimumLineSpacing = lineSpace
+        viewLayout.minimumInteritemSpacing = itemSpace
+        viewLayout.invalidateLayout()
+    }
+}
+
+// MARK: - Data Source
 
 private extension RoomsViewController {
     private func dataSource() -> RoomsDataSource {

@@ -7,10 +7,12 @@
 
 import UIKit
 import Extensions
+import SharedViews
 
-final class RoomCell: UICollectionViewCell, Reusable, ViewSettableType {
+final class RoomCell: DynamicCollectionCell, Reusable, ViewSettableType {
     // MARK: - Properties
     
+    private let container = UIView()
     private let titleLabel = UILabel()
     
     // MARK: - Constructor
@@ -27,21 +29,30 @@ final class RoomCell: UICollectionViewCell, Reusable, ViewSettableType {
     // MARK: - Setup
     
     func setupViews() {
-        contentView.backgroundColor = UIColor.green
-        contentView.layer.cornerRadius = 10
+        container.backgroundColor = .blue
+        container.layer.cornerRadius = 10
         
         titleLabel.textColor = .white
         titleLabel.font = .systemFont(ofSize: 20)
     }
     
     func addViews() {
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(container)
+        container.addSubview(titleLabel)
     }
     
     func layoutViews() {
         titleLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.left.right.equalToSuperview().inset(30)
+        }
+        
+        container.snp.makeConstraints {
+            $0.height.equalTo(70)
+            $0.edges.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.bottom.equalTo(container.snp.bottom)
         }
     }
 }

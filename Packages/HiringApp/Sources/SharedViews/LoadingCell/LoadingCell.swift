@@ -9,9 +9,10 @@ import UIKit
 import Extensions
 import SnapKit
 
-public final class LoadingCell: UICollectionViewCell, ViewSettableType, Reusable {
+public final class LoadingCell: DynamicCollectionCell, ViewSettableType, Reusable {
     // MARK: - Properties
     
+    private let container = UIView()
     private let activityIndicator: UIActivityIndicatorView = {
         if #available(iOS 13.0, *) {
             return UIActivityIndicatorView(style: .medium)
@@ -51,13 +52,22 @@ public final class LoadingCell: UICollectionViewCell, ViewSettableType, Reusable
     }
     
     public func addViews() {
-        contentView.addSubview(activityIndicator)
+        contentView.addSubview(container)
+        container.addSubview(activityIndicator)
     }
     
     public func layoutViews() {
         activityIndicator.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.top.bottom.equalToSuperview().inset(50)
+        }
+        
+        container.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.bottom.equalTo(container.snp.bottom)
         }
     }
 }

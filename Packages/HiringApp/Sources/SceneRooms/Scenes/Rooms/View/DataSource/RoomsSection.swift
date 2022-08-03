@@ -14,19 +14,19 @@ struct RoomsSection: Hashable, SectionModelType {
     }
     
     let type: SectionType
-    let items: [SingleSectionItem]
+    let items: [RoomsSectionItem]
     
-    init(original: RoomsSection, items: [SingleSectionItem]) {
+    init(original: RoomsSection, items: [RoomsSectionItem]) {
         self = .init(original.type, items: items)
     }
     
-    init(_ type: SectionType, items: [SingleSectionItem]) {
+    init(_ type: SectionType, items: [RoomsSectionItem]) {
         self.type = type
         self.items = items
     }
 }
 
-enum SingleSectionItem: Hashable {
+enum RoomsSectionItem: Hashable {
     case loading
     case error(_ message: String)
     case model(_ model: RoomCellModel)

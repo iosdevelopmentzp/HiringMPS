@@ -8,6 +8,8 @@
 import Foundation
 import MVVM
 import UseCases
+import RxCocoa
+import RxSwift
 
 public struct RoomsViewModel: ViewModel {
     // MARK: - Nested
@@ -17,12 +19,14 @@ public struct RoomsViewModel: ViewModel {
     }
     
     public struct Output {
-        
+        let stateObservable: Driver<RoomsState>
     }
     
     // MARK: - Properties
     
     private let companyUseCase: CompanyUseCaseProtocol
+    
+    private let stateSubject = BehaviorSubject(value: RoomsState.idle)
     
     // MARK: - Constructor
     
@@ -33,6 +37,8 @@ public struct RoomsViewModel: ViewModel {
     // MARK: - Bind
     
     public func bind(input: Input) -> Output {
-        .init()
+        return .init(
+            stateObservable: stateSubject.asDriver(onErrorJustReturn: .idle)
+        )
     }
 }
