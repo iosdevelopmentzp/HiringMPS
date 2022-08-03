@@ -29,6 +29,7 @@ final class TabBarCoordinator: NavigationCoordinator {
     override func start() {
         tabBarController.viewControllers = makeTabViewControllers()
         navigation.pushViewController(tabBarController, animated: false)
+        tabBarController.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 }
 
@@ -53,7 +54,7 @@ private extension TabBarCoordinator {
             let coordinator = self.coordinator(for: $0, navigation: navigation)
             coordinator.start()
             navigation.viewControllers.first?.tabBarItem = tabItem(for: $0)
-            return navigation.viewControllers.first
+            return navigation
         }
         .compactMap { $0 }
     }

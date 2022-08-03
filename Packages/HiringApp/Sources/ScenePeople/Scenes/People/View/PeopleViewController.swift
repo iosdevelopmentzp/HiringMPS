@@ -76,6 +76,10 @@ public final class PeopleViewController: UIViewController, View, ViewSettableTyp
         viewLayout.scrollDirection = .vertical
     }
     
+    public func setupLocalization() {
+        navigationItem.title = "Company Staff"
+    }
+    
     public func addViews() {
         view.addSubview(collectionView)
     }

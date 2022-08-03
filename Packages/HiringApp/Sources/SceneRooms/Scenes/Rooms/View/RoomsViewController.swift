@@ -76,6 +76,10 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
         viewLayout.scrollDirection = .vertical
     }
     
+    public func setupLocalization() {
+        navigationItem.title = "Company Rooms"
+    }
+    
     public func addViews() {
         view.addSubview(collectionView)
     }

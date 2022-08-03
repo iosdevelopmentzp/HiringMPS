@@ -9,6 +9,7 @@ import Foundation
 
 public protocol ViewSettableType {
     func setupViews()
+    func setupLocalization()
     func addViews()
     func layoutViews()
 }
@@ -16,12 +17,17 @@ public protocol ViewSettableType {
 public extension ViewSettableType {
     func performSetupViews() {
         setupViews()
+        setupLocalization()
         addViews()
         layoutViews()
     }
     
     func setupViews() {
         // Default Implementation
+    }
+    
+    func setupLocalization() {
+        
     }
     
     func addViews() {
