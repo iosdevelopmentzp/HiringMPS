@@ -12,7 +12,6 @@ import SharedViews
 final class RoomCell: DynamicCollectionCell, Reusable, ViewSettableType {
     // MARK: - Properties
     
-    private let container = UIView()
     private let titleLabel = UILabel()
     
     // MARK: - Constructor
@@ -48,11 +47,6 @@ final class RoomCell: DynamicCollectionCell, Reusable, ViewSettableType {
         
         container.snp.makeConstraints {
             $0.height.equalTo(70)
-            $0.edges.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.bottom.equalTo(container.snp.bottom)
         }
     }
 }

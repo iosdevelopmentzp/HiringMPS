@@ -79,7 +79,7 @@ public final class ErrorCell: DynamicCollectionCell, ViewSettableType, Reusable 
     }
     
     public func addViews() {
-        contentView.addSubview(stackView)
+        container.addSubview(stackView)
         stackView.addArrangedSubview(errorImageView)
         stackView.addArrangedSubview(contentStackView)
         contentStackView.addArrangedSubview(titleLabel)
@@ -94,10 +94,6 @@ public final class ErrorCell: DynamicCollectionCell, ViewSettableType, Reusable 
     public func layoutViews() {
         stackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.bottom.equalTo(stackView.snp.bottom)
         }
     }
     

@@ -12,7 +12,6 @@ import SnapKit
 public final class LoadingCell: DynamicCollectionCell, ViewSettableType, Reusable {
     // MARK: - Properties
     
-    private let container = UIView()
     private let activityIndicator: UIActivityIndicatorView = {
         if #available(iOS 13.0, *) {
             return UIActivityIndicatorView(style: .medium)
@@ -52,7 +51,6 @@ public final class LoadingCell: DynamicCollectionCell, ViewSettableType, Reusabl
     }
     
     public func addViews() {
-        contentView.addSubview(container)
         container.addSubview(activityIndicator)
     }
     
@@ -62,12 +60,7 @@ public final class LoadingCell: DynamicCollectionCell, ViewSettableType, Reusabl
         }
         
         container.snp.makeConstraints {
-            $0.edges.equalToSuperview()
             $0.height.equalTo(80)
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.bottom.equalTo(container.snp.bottom)
         }
     }
 }
