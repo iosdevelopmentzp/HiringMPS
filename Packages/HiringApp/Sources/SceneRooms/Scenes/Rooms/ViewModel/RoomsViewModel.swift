@@ -15,7 +15,8 @@ public struct RoomsViewModel: ViewModel {
     // MARK: - Nested
     
     public struct Input {
-        
+        let reloadTapEvent: ControlEvent<Void>
+        let disposeBag: DisposeBag
     }
     
     public struct Output {
@@ -28,6 +29,8 @@ public struct RoomsViewModel: ViewModel {
     
     private let stateSubject = BehaviorSubject(value: RoomsState.idle)
     
+    private let lock = NSLock()
+    
     // MARK: - Constructor
     
     public init(_ companyUseCase: CompanyUseCaseProtocol) {
@@ -36,9 +39,50 @@ public struct RoomsViewModel: ViewModel {
     
     // MARK: - Bind
     
-    public func bind(input: Input) -> Output {
-        return .init(
-            stateObservable: stateSubject.asDriver(onErrorJustReturn: .idle)
+    public func transform(_ input: Input, outputHandler: @escaping (Output) -> Void) {
+        input.disposeBag.insert([
+            setupLoadObserving(with: Observable.merge([input.reloadTapEvent.asObservable(), .just(())]))
+        ])
+        
+        outputHandler(
+            .init(stateObservable: stateSubject.asDriver(onErrorJustReturn: .idle))
         )
+    }
+}
+
+// MARK: - Setup
+
+private extension RoomsViewModel {
+    private func setupLoadObserving(with signal: Observable<Void>) -> Disposable {
+        signal
+            .flatMapLatest { _ in
+                loadData()
+            }
+            .distinctUntilChanged()
+            .catch { .just(.error($0.localizedDescription)) }
+            .bind(to: stateSubject)
+    }
+}
+
+// MARK: - Private Function
+
+private extension RoomsViewModel {
+    private func loadData() -> Observable<RoomsState> {
+        updateState(.loading)
+        
+        return companyUseCase
+            .setupRooms()
+            .asObservable()
+            .map { rooms -> RoomsState in
+                return .loaded(models: rooms.map(RoomCellModel.Factory.make(from:)))
+            }
+    }
+    
+    /// Thread safe way to update state
+    ///
+    private func updateState(_ state: RoomsState) {
+        lock.lock()
+        defer { lock.unlock() }
+        stateSubject.onNext(state)
     }
 }

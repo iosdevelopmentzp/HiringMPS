@@ -11,5 +11,5 @@ public protocol ViewModel {
     associatedtype Input
     associatedtype Output
     
-    func bind(input: Input) -> Output
+    func transform(_ input: Input, outputHandler: @escaping (Output) -> Void)
 }

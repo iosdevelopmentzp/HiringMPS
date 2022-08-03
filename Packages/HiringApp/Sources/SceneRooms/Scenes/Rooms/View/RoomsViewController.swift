@@ -83,8 +83,16 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     }
     
     public func setupOutput() {
-        let input = viewModel.bind(input: .init())
-        setupInput(input)
+        let event = ControlEvent(events: Observable.just(()))
+        
+        let input = RoomsViewModel.Input(
+            reloadTapEvent: event,
+            disposeBag: disposeBag
+        )
+        
+        viewModel.transform(input) {
+            self.setupInput($0)
+        }
     }
     
     public func setupInput(_ input: RoomsViewModel.Output) {

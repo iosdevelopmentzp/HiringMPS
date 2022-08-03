@@ -14,7 +14,6 @@ final class Networking {
     func perform<T: Decodable>(target: TargetType, decoder: JSONDecoder = .api) -> Single<T> {
         RxAlamofire
             .request(target.method, target, parameters: target.parameters, headers: target.asHTTPHeaders)
-            .debug()
             .validate(statusCode: 200 ... 399)
             .validate(contentType: ["application/json"])
             .data()
