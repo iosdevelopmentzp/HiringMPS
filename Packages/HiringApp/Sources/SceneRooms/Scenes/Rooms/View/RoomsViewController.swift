@@ -89,7 +89,7 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     public func setupOutput() {
         let input = RoomsViewModel.Input(
             viewWillAppearEvent: rx.viewWillAppear,
-            reloadTapEvent: ControlEvent(events: retrySubject),
+            retryTapEvent: ControlEvent(events: retrySubject),
             disposeBag: disposeBag
         )
         

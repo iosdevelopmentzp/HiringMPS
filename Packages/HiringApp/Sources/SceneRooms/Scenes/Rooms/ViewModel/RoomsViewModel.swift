@@ -16,7 +16,7 @@ public class RoomsViewModel: ViewModel {
     
     public struct Input {
         let viewWillAppearEvent: ControlEvent<Void>
-        let reloadTapEvent: ControlEvent<Void>
+        let retryTapEvent: ControlEvent<Void>
         let disposeBag: DisposeBag
     }
     
@@ -28,7 +28,7 @@ public class RoomsViewModel: ViewModel {
     
     public weak var sceneDelegate: RoomsSceneDelegate?
     
-    private let companyUseCase: CompanyUseCaseProtocol
+    private let useCase: CompanyUseCaseProtocol
     
     private let stateSubject = BehaviorSubject(value: RoomsState.idle)
     
@@ -37,14 +37,14 @@ public class RoomsViewModel: ViewModel {
     // MARK: - Constructor
     
     public init(_ companyUseCase: CompanyUseCaseProtocol) {
-        self.companyUseCase = companyUseCase
+        self.useCase = companyUseCase
     }
     
     // MARK: - Bind
     
     public func transform(_ input: Input, outputHandler: @escaping (Output) -> Void) {
         let loadSignal = Observable.merge([
-            input.reloadTapEvent.asObservable(),
+            input.retryTapEvent.asObservable(),
             input.viewWillAppearEvent.take(1)
         ])
         
@@ -76,7 +76,7 @@ private extension RoomsViewModel {
     private func loadData() -> Observable<RoomsState> {
         updateState(.loading)
         
-        return companyUseCase
+        return useCase
             .setupRooms()
             .asObservable()
             .map { rooms -> RoomsState in
