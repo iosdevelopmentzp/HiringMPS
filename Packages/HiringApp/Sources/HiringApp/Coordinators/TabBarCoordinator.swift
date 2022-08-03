@@ -7,17 +7,19 @@
 
 import UIKit
 import DependencyResolver
+import Animators
+import SharedViews
 
 final class TabBarCoordinator: NavigationCoordinator {
     // MARK: - Properties
     
-    private let tabBarController: UITabBarController
+    private let tabBarController: AppTabBarViewController
     private let resolver: DependencyResolverProtocol
     
     // MARK: - Constructor
     
     init(_ resolver: DependencyResolverProtocol, navigation: UINavigationController) {
-        tabBarController = UITabBarController()
+        tabBarController = AppTabBarViewController()
         self.resolver = resolver
         super.init(navigation: navigation)
     }
@@ -26,7 +28,6 @@ final class TabBarCoordinator: NavigationCoordinator {
     
     override func start() {
         tabBarController.viewControllers = makeTabViewControllers()
-        
         navigation.pushViewController(tabBarController, animated: false)
     }
 }

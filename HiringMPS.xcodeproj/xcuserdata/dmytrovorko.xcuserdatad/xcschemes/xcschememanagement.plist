@@ -105,21 +105,21 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>26</integer>
+			<integer>21</integer>
 		</dict>
 		<key>Rx (Playground) 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>22</integer>
 		</dict>
 		<key>Rx (Playground) 5.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>28</integer>
+			<integer>23</integer>
 		</dict>
 		<key>Rx (Playground) 6.xcscheme</key>
 		<dict>
@@ -273,21 +273,21 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>27</integer>
 		</dict>
 		<key>Sample-iOS (Playground) 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>28</integer>
 		</dict>
 		<key>Sample-iOS (Playground) 5.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>29</integer>
 		</dict>
 		<key>Sample-iOS (Playground) 6.xcscheme</key>
 		<dict>
@@ -441,21 +441,21 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>24</integer>
 		</dict>
 		<key>SnapKitPlayground (Playground) 4.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>25</integer>
 		</dict>
 		<key>SnapKitPlayground (Playground) 5.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>26</integer>
 		</dict>
 		<key>SnapKitPlayground (Playground) 6.xcscheme</key>
 		<dict>

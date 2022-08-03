@@ -17,6 +17,7 @@ let package = Package(
         .library(name: "DependencyResolver", targets: ["DependencyResolver"]),
         .library(name: "HiringApp", targets: ["HiringApp"]),
         .library(name: "SharedViews", targets: ["SharedViews"]),
+        .library(name: "Animators", targets: ["Animators"]),
         
         // scenes
         
@@ -74,13 +75,17 @@ let package = Package(
         .target(name: "HiringApp", dependencies: [
             "DependencyResolver",
             "SceneRooms",
-            "ScenePeople"
+            "ScenePeople",
+            "SharedViews"
         ]),
         
         .target(name: "SharedViews", dependencies: [
             "Extensions",
-            "SnapKit"
+            "SnapKit",
+            "Animators"
         ]),
+        
+        .target(name: "Animators"),
         
         // scenes
         
