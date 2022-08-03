@@ -29,7 +29,10 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     private let disposeBag = DisposeBag()
     
     private let viewLayout = UICollectionViewFlowLayout()
+    
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
+    
+    private let retrySubject = PublishSubject<Void>()
     
     private var layoutMode: LayoutMode = .singleColumn {
         didSet {
@@ -83,10 +86,8 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     }
     
     public func setupOutput() {
-        let event = ControlEvent(events: Observable.just(()))
-        
         let input = RoomsViewModel.Input(
-            reloadTapEvent: event,
+            reloadTapEvent: ControlEvent(events: retrySubject),
             disposeBag: disposeBag
         )
         
@@ -144,7 +145,7 @@ private extension RoomsViewController {
 
 private extension RoomsViewController {
     private func dataSource() -> RoomsDataSource {
-        .init { collectionView, indexPath, item in
+        .init { [weak self] collectionView, indexPath, item in
             switch item {
             case .loading:
                 return collectionView.dequeueReusableCell(ofType: LoadingCell.self, at: indexPath)
@@ -152,6 +153,7 @@ private extension RoomsViewController {
             case .error(let message):
                 let cell = collectionView.dequeueReusableCell(ofType: ErrorCell.self, at: indexPath)
                 cell.configure(using: message)
+                cell.delegate = self
                 return cell
                 
             case .model(let model):
@@ -160,5 +162,13 @@ private extension RoomsViewController {
                 return cell
             }
         }
+    }
+}
+
+// MARK: - ErrorCellEventsDelegate
+
+extension RoomsViewController: ErrorCellEventsDelegate {
+    public func cell(_ cell: ErrorCell, didPressRetryButton sender: UIButton) {
+        retrySubject.onNext(())
     }
 }

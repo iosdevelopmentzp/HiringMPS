@@ -58,8 +58,6 @@ private extension RoomsViewModel {
             .flatMapLatest { _ in
                 loadData()
             }
-            .distinctUntilChanged()
-            .catch { .just(.error($0.localizedDescription)) }
             .bind(to: stateSubject)
     }
 }
@@ -76,6 +74,7 @@ private extension RoomsViewModel {
             .map { rooms -> RoomsState in
                 return .loaded(models: rooms.map(RoomCellModel.Factory.make(from:)))
             }
+            .catch { .just(.error($0.localizedDescription)) }
     }
     
     /// Thread safe way to update state
