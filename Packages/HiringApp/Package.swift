@@ -21,6 +21,7 @@ let package = Package(
         // scenes
         
         .library(name: "SceneRooms", targets: ["SceneRooms"]),
+        .library(name: "ScenePeople", targets: ["ScenePeople"]),
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
@@ -72,7 +73,8 @@ let package = Package(
         
         .target(name: "HiringApp", dependencies: [
             "DependencyResolver",
-            "SceneRooms"
+            "SceneRooms",
+            "ScenePeople"
         ]),
         
         .target(name: "SharedViews", dependencies: [
@@ -83,6 +85,19 @@ let package = Package(
         // scenes
         
         .target(name: "SceneRooms", dependencies: [
+            "UseCases",
+            "Core",
+            "MVVM",
+            "Extensions",
+            "SnapKit",
+            "RxDataSources",
+            "SharedViews",
+            "RxExtensions",
+            .product(name: "RxSwift", package: "RxSwift"),
+            .product(name: "RxCocoa", package: "RxSwift")
+        ]),
+        
+        .target(name: "ScenePeople", dependencies: [
             "UseCases",
             "Core",
             "MVVM",

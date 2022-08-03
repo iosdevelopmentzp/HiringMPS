@@ -1,16 +1,15 @@
 //
-//  RoomsCoordinator.swift
+//  PeopleCoordinator.swift
 //  
 //
 //  Created by Dmytro Vorko on 03.08.2022.
 //
 
-import Foundation
 import DependencyResolver
 import UIKit
-import SceneRooms
+import ScenePeople
 
-final class RoomsCoordinator: NavigationCoordinator {
+final class PeopleCoordinator: NavigationCoordinator {
     private let resolver: DependencyResolverProtocol
     
     init(_ resolver: DependencyResolverProtocol, navigation: UINavigationController) {
@@ -19,15 +18,16 @@ final class RoomsCoordinator: NavigationCoordinator {
     }
     
     override func start() {
-        let viewModel = RoomsViewModel(resolver.resolve())
+        let viewModel = PeopleViewModel(resolver.resolve())
         viewModel.sceneDelegate = self
-        let view = RoomsViewController(viewModel)
+        let view = PeopleViewController(viewModel)
         navigation.pushViewController(view, animated: true)
     }
 }
 
 // MARK: - RoomsSceneDelegate
 
-extension RoomsCoordinator: RoomsSceneDelegate {
+extension PeopleCoordinator: PeopleSceneDelegate {
     // Handle RoomsModule navigations events
 }
+

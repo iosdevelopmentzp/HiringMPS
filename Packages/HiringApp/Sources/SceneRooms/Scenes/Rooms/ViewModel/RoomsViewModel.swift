@@ -11,7 +11,7 @@ import UseCases
 import RxCocoa
 import RxSwift
 
-public struct RoomsViewModel: ViewModel {
+public class RoomsViewModel: ViewModel {
     // MARK: - Nested
     
     public struct Input {
@@ -25,6 +25,8 @@ public struct RoomsViewModel: ViewModel {
     }
     
     // MARK: - Properties
+    
+    public weak var sceneDelegate: RoomsSceneDelegate?
     
     private let companyUseCase: CompanyUseCaseProtocol
     
@@ -62,7 +64,7 @@ private extension RoomsViewModel {
     private func setupLoadObserving(with signal: Observable<Void>) -> Disposable {
         signal
             .flatMapLatest { _ in
-                loadData()
+                self.loadData()
             }
             .bind(to: stateSubject)
     }
