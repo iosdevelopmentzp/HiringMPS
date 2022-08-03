@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "HiringApp",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v11)],
     products: [
         .library(name: "Extensions", targets: ["Extensions"]),
         .library(name: "MVVM", targets: ["MVVM"]),
@@ -15,6 +15,7 @@ let package = Package(
         .library(name: "Assemblies", targets: ["Assemblies"]),
         .library(name: "DependencyResolver", targets: ["DependencyResolver"]),
         .library(name: "HiringApp", targets: ["HiringApp"]),
+        .library(name: "SharedViews", targets: ["SharedViews"]),
         
         // scenes
         
@@ -29,7 +30,8 @@ let package = Package(
                 
         .package(url: "https://github.com/ReactiveX/RxSwift.git", exact: "6.5.0"),
         .package(url: "https://github.com/RxSwiftCommunity/RxAlamofire.git",
-                 exact: "6.1.2")
+                 exact: "6.1.2"),
+        .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", exact: "5.0.2")
     ],
     targets: [
         .target(name: "Extensions"),
@@ -67,6 +69,11 @@ let package = Package(
             "SceneRooms"
         ]),
         
+        .target(name: "SharedViews", dependencies: [
+            "Extensions",
+            "SnapKit"
+        ]),
+        
         // scenes
         
         .target(name: "SceneRooms", dependencies: [
@@ -75,6 +82,8 @@ let package = Package(
             "MVVM",
             "Extensions",
             "SnapKit",
+            "RxDataSources",
+            "SharedViews",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ])
