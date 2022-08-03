@@ -8,6 +8,10 @@
 import Foundation
 
 struct PeopleCellModel: Hashable {
-    let id: String
-    let title: String?
+    public let id: String
+    public let fullName: String?
+    public let avatarLink: String?
+    public let email: String?
+    public let jobTitle: String?
+    public let favoriteColor: String?
 }

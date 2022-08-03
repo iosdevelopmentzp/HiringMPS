@@ -26,7 +26,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", exact: "5.6.0"),
-        .package(url: "https://github.com/onevcat/Kingfisher", exact: "7.0.0"),
+        .package(url: "https://github.com/SDWebImage/SDWebImage.git", exact: "5.13.2"),
         .package(url: "https://github.com/Swinject/Swinject.git", exact: "2.8.0"),
         
         // Rx
@@ -111,6 +111,7 @@ let package = Package(
             "RxDataSources",
             "SharedViews",
             "RxExtensions",
+            "SDWebImage",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ])

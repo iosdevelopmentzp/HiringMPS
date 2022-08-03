@@ -8,11 +8,16 @@
 import UIKit
 import SharedViews
 import Extensions
+import SDWebImage
 
 final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
     // MARK: - Properties
     
-    private let titleLabel = UILabel()
+    private let roundedContainer = UIView()
+    private let avatarImageView = UIImageView()
+    private let fullNameLabel = UILabel()
+    private let jobTitleLabel = UILabel()
+    private let emailLabel = UILabel()
     
     // MARK: - Constructor
     
@@ -25,28 +30,58 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Override
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarImageView.sd_cancelCurrentImageLoad()
+        avatarImageView.image = nil
+    }
+    
     // MARK: - Setup
     
     func setupViews() {
-        container.backgroundColor = .blue
+        container.backgroundColor = .white
         container.layer.cornerRadius = 10
         
-        titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 20)
+        roundedContainer.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.7960784314, blue: 0.7647058824, alpha: 1)
+        roundedContainer.layer.cornerRadius = 10
+        
+        fullNameLabel.textColor = .black
+        fullNameLabel.font = .systemFont(ofSize: 20)
+        
+        jobTitleLabel.textColor = .black
+        jobTitleLabel.font = .systemFont(ofSize: 17)
+        
+        emailLabel.textColor = .darkGray
+        emailLabel.font = .systemFont(ofSize: 14, weight: .thin)
+        
+        avatarImageView.contentMode = .scaleAspectFit
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = 35
     }
     
     func addViews() {
-        contentView.addSubview(container)
-        container.addSubview(titleLabel)
+        container.addSubview(roundedContainer)
+        roundedContainer.addSubview(avatarImageView)
+        roundedContainer.addSubview(fullNameLabel)
+        roundedContainer.addSubview(jobTitleLabel)
+        roundedContainer.addSubview(emailLabel)
     }
     
     func layoutViews() {
-        titleLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
+        roundedContainer.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(10)
         }
         
-        container.snp.makeConstraints {
-            $0.height.equalTo(70)
+        avatarImageView.snp.makeConstraints {
+            $0.size.equalTo(70)
+            $0.left.top.equalToSuperview().offset(10)
+        }
+        
+        fullNameLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(40)
         }
     }
 }
@@ -55,7 +90,11 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
 
 extension PeopleCell {
     func configure(using model: PeopleCellModel) {
-        titleLabel.text = model.title
+        fullNameLabel.text = model.fullName
+        
+        model.avatarLink.flatMap { URL(string: $0) }.map {
+            avatarImageView.sd_setImage(with: $0)
+        }
     }
 }
 

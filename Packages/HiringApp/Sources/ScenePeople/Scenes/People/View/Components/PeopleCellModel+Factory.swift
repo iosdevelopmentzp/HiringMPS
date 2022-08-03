@@ -11,7 +11,14 @@ import Core
 extension PeopleCellModel {
     struct Factory {
         static func make(from employee: Employee) -> PeopleCellModel {
-            .init(id: employee.id, title: employee.firstName)
+            .init(
+                id: employee.id,
+                fullName: [employee.firstName, employee.lastName].compactMap { $0 }.joined(separator: " "),
+                avatarLink: employee.avatarLink,
+                email: employee.email,
+                jobTitle: employee.jobTitle,
+                favoriteColor: employee.favoriteColor
+            )
         }
     }
 }
