@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0750A1289BDBC500F1DF69 /* Coordinators in Frameworks */ = {isa = PBXBuildFile; productRef = 3B0750A0289BDBC500F1DF69 /* Coordinators */; };
 		3BAB88EF2899916100EB3EA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB88EE2899916100EB3EA3 /* AppDelegate.swift */; };
 		3BAB88F12899916100EB3EA3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB88F02899916100EB3EA3 /* SceneDelegate.swift */; };
 		3BAB88F82899916C00EB3EA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAB88F72899916C00EB3EA3 /* Assets.xcassets */; };
@@ -15,7 +16,6 @@
 		3BAB89102899916D00EB3EA3 /* HiringMPSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB890F2899916D00EB3EA3 /* HiringMPSUITests.swift */; };
 		3BAB89122899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89112899916D00EB3EA3 /* HiringMPSUITestsLaunchTests.swift */; };
 		3BAB89252899B27100EB3EA3 /* AppCoordinator+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAB89242899B27100EB3EA3 /* AppCoordinator+Launch.swift */; };
-		3BAB892C2899CE6500EB3EA3 /* HiringApp in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892B2899CE6500EB3EA3 /* HiringApp */; };
 		3BAB892E2899E3C100EB3EA3 /* Assemblies in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892D2899E3C100EB3EA3 /* Assemblies */; };
 		3BAB89302899E3C200EB3EA3 /* DependencyResolver in Frameworks */ = {isa = PBXBuildFile; productRef = 3BAB892F2899E3C200EB3EA3 /* DependencyResolver */; };
 		3BC96A5B2899E595000842F4 /* APIConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BC96A5A2899E595000842F4 /* APIConfiguration.plist */; };
@@ -68,7 +68,7 @@
 			files = (
 				3BAB892E2899E3C100EB3EA3 /* Assemblies in Frameworks */,
 				3BAB89302899E3C200EB3EA3 /* DependencyResolver in Frameworks */,
-				3BAB892C2899CE6500EB3EA3 /* HiringApp in Frameworks */,
+				3B0750A1289BDBC500F1DF69 /* Coordinators in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,9 +209,9 @@
 			);
 			name = HiringMPS;
 			packageProductDependencies = (
-				3BAB892B2899CE6500EB3EA3 /* HiringApp */,
 				3BAB892D2899E3C100EB3EA3 /* Assemblies */,
 				3BAB892F2899E3C200EB3EA3 /* DependencyResolver */,
+				3B0750A0289BDBC500F1DF69 /* Coordinators */,
 			);
 			productName = HiringMPS;
 			productReference = 3BAB88EB2899916100EB3EA3 /* HiringMPS.app */;
@@ -675,9 +675,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3BAB892B2899CE6500EB3EA3 /* HiringApp */ = {
+		3B0750A0289BDBC500F1DF69 /* Coordinators */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = HiringApp;
+			productName = Coordinators;
 		};
 		3BAB892D2899E3C100EB3EA3 /* Assemblies */ = {
 			isa = XCSwiftPackageProductDependency;

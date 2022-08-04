@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import HiringApp
+import Coordinators
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

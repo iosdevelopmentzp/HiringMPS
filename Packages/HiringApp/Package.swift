@@ -15,7 +15,7 @@ let package = Package(
         .library(name: "UseCases", targets: ["UseCases"]),
         .library(name: "Assemblies", targets: ["Assemblies"]),
         .library(name: "DependencyResolver", targets: ["DependencyResolver"]),
-        .library(name: "HiringApp", targets: ["HiringApp"]),
+        .library(name: "Coordinators", targets: ["Coordinators"]),
         .library(name: "SharedViews", targets: ["SharedViews"]),
         .library(name: "Animators", targets: ["Animators"]),
         
@@ -72,7 +72,7 @@ let package = Package(
             "Swinject"
         ]),
         
-        .target(name: "HiringApp", dependencies: [
+        .target(name: "Coordinators", dependencies: [
             "DependencyResolver",
             "SceneRooms",
             "ScenePeople",

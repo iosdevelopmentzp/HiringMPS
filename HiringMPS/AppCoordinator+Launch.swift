@@ -5,10 +5,10 @@
 //  Created by Dmytro Vorko on 02.08.2022.
 //
 
-import HiringApp
 import UIKit
 import DependencyResolver
 import Assemblies
+import Coordinators
 
 extension AppCoordinator {
     static func launch(with window: UIWindow) -> AppCoordinator {
