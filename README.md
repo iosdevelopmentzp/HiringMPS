@@ -1,16 +1,16 @@
 # HiringMPS
 Test project for MPS
 
-![HiringMPS](Screenshot/1.gif)
+![HiringMPS](Screenshots/1.gif)
 
-![HiringMPS](Screenshot/2.gif)
+![HiringMPS](Screenshots/2.gif)
 
-![HiringMPS](Screenshot/3.gif)
+![HiringMPS](Screenshots/3.gif)
 
-![HiringMPS](Screenshot/4.gif)
+![HiringMPS](Screenshots/4.gif)
 
-![HiringMPS](Screenshot/people.png)
+![HiringMPS](Screenshots/people.png)
 
-![HiringMPS](Screenshot/rooms.png)
+![HiringMPS](Screenshots/rooms.png)
 
-![HiringMPS](Screenshot/error.png)
+![HiringMPS](Screenshots/error.png)
