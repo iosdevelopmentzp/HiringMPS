@@ -9,6 +9,7 @@ import UIKit
 import SharedViews
 import Extensions
 import SDWebImage
+import AppDesign
 
 final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
     // MARK: - Nested
@@ -23,6 +24,7 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
     private let jobTitleLabel = UILabel()
     private let emailLabel = UILabel()
     private let separators: Separatos = (UIView(), UIView(), UIView())
+    private let imageLoadingIndicator = UIActivityIndicatorView()
     
     private var allSeparators: [UIView] {
         [separators.top, separators.middle, separators.bottom]
@@ -94,9 +96,12 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         emailLabel.numberOfLines = 0
         emailLabel.textAlignment = .right
         
+        avatarImageView.tintColor = Colors.appAccent
         avatarImageView.contentMode = .scaleAspectFit
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = 35
+        
+        imageLoadingIndicator.hidesWhenStopped = true
         
         allSeparators.forEach {
             $0.backgroundColor = .lightGray.withAlphaComponent(0.4)
@@ -109,6 +114,7 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         roundedContainer.addSubview(fullNameLabel)
         roundedContainer.addSubview(jobTitleLabel)
         roundedContainer.addSubview(emailLabel)
+        roundedContainer.addSubview(imageLoadingIndicator)
         
         allSeparators.forEach {
             roundedContainer.addSubview($0)
@@ -135,6 +141,10 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
             $0.size.equalTo(70)
             $0.left.equalToSuperview().offset(10)
             $0.top.equalTo(self.separators.top.snp.bottom).offset(10)
+        }
+        
+        imageLoadingIndicator.snp.makeConstraints {
+            $0.center.equalTo(self.avatarImageView)
         }
         
         fullNameLabel.snp.makeConstraints {
@@ -170,9 +180,20 @@ extension PeopleCell {
         fullNameLabel.text = model.fullName
         jobTitleLabel.text = model.jobTitle
         emailLabel.text = model.email
-        
-        model.avatarLink.flatMap { URL(string: $0) }.map {
-            avatarImageView.sd_setImage(with: $0)
+        imageLoadingIndicator.startAnimating()
+        let url = model.avatarLink.flatMap { URL(string: $0) }
+        url.map {
+            avatarImageView.sd_setImage(with: $0) { image, error, _, url in
+                self.imageLoadingIndicator.stopAnimating()
+                let isSucceeded = error == nil && image != nil
+                guard !isSucceeded else { return }
+                if #available(iOS 13.0, *) {
+                    self.avatarImageView.image = UIImage(systemName: "person.fill")?.withRenderingMode(.alwaysTemplate)
+                } else {
+                    self.avatarImageView.image = nil
+                }
+               
+            }
         }
     }
 }
