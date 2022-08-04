@@ -125,17 +125,17 @@ private extension RoomsViewController {
         
         switch layoutMode {
         case .singleColumn:
-            itemWidth = collectionView.bounds.width
             itemSpace = 0
+            itemWidth = collectionView.bounds.width
             
         case .dualColumn:
-            itemSpace = 10
-            itemWidth = (collectionView.bounds.width / 2) - itemSpace
+            itemSpace = 0
+            itemWidth = ((collectionView.bounds.width / 2) - itemSpace).rounded(.down)
         }
         
         let newItemSize = CGSize(width: itemWidth, height: 10)
         
-        guard viewLayout.itemSize != newItemSize ||
+        guard viewLayout.estimatedItemSize != newItemSize ||
                 viewLayout.minimumInteritemSpacing != itemSpace ||
                 viewLayout.minimumLineSpacing != lineSpace else {
             return
