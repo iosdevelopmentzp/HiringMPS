@@ -47,6 +47,24 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         avatarImageView.image = nil
     }
     
+    override var isHighlighted: Bool {
+        didSet {
+            let alpha = isHighlighted ? 0.6 : 1.0
+            UIView.animate(withDuration: 0.2) {
+                self.contentView.alpha = alpha
+            }
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            let color: UIColor = isSelected ? .red : .clear
+            UIView.animate(withDuration: 0.2) {
+                self.roundedContainer.layer.borderColor = color.cgColor
+            }
+        }
+    }
+    
     // MARK: - Setup
     
     func setupViews() {
@@ -54,6 +72,8 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         container.layer.cornerRadius = 10
         
         roundedContainer.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.7960784314, blue: 0.7647058824, alpha: 1)
+        roundedContainer.layer.borderWidth = 1
+        roundedContainer.layer.borderColor = UIColor.clear.cgColor
         roundedContainer.layer.cornerRadius = 10
         roundedContainer.layer.shadowOffset = .init(width: 4, height: 4)
         roundedContainer.layer.shadowColor = UIColor.gray.cgColor
