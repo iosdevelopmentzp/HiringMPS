@@ -35,7 +35,7 @@ public class RoomsViewController: UIViewController, View, ViewSettableType {
     
     private let retrySubject = PublishSubject<Void>()
     
-    private var layoutMode: LayoutMode = .singleColumn {
+    private var layoutMode: LayoutMode = .dualColumn {
         didSet {
             guard layoutMode != oldValue else { return }
             recalculateLayout()
