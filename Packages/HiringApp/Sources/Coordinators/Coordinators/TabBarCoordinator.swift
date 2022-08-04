@@ -9,6 +9,7 @@ import UIKit
 import DependencyResolver
 import Animators
 import SharedViews
+import AppDesign
 
 final class TabBarCoordinator: NavigationCoordinator {
     // MARK: - Properties
@@ -36,16 +37,9 @@ final class TabBarCoordinator: NavigationCoordinator {
 // MARK: - Private
 
 private extension TabBarCoordinator {
-    enum TabType: CaseIterable {
+    enum TabType: Int, CaseIterable {
         case people
         case rooms
-        
-        var tag: Int {
-            guard let index = TabType.allCases.firstIndex(of: self) else {
-                fatalError("Unexpected behaviour")
-            }
-            return index
-        }
     }
     
     private func makeTabViewControllers()  -> [UIViewController] {
@@ -60,24 +54,17 @@ private extension TabBarCoordinator {
     }
     
     private func tabItem(for tabType: TabType) -> UITabBarItem {
-        let title: String
+        let image: UIImage?
+        
         switch tabType {
         case .people:
-            title = "People"
+            image = Images.AppTabBar.peopleTab.image
 
         case .rooms:
-            title = "Rooms"
+            image = Images.AppTabBar.roomsTab.image
         }
         
-        let item = UITabBarItem(title: title, image: .init(), tag: tabType.tag)
-        item.setTitleTextAttributes(
-            [
-                .font: UIFont.systemFont(ofSize: 17),
-                .foregroundColor: UIColor.red
-            ],
-            for: .normal
-        )
-        
+        let item = UITabBarItem(title: nil, image: image, tag: tabType.rawValue)
         return item
     }
     

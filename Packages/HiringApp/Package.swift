@@ -7,6 +7,7 @@ let package = Package(
     name: "HiringApp",
     platforms: [.iOS(.v11)],
     products: [
+        .library(name: "AppDesign", targets: ["AppDesign"]),
         .library(name: "Extensions", targets: ["Extensions"]),
         .library(name: "RxExtensions", targets: ["RxExtensions"]),
         .library(name: "MVVM", targets: ["MVVM"]),
@@ -37,6 +38,8 @@ let package = Package(
         .package(url: "https://github.com/RxSwiftCommunity/RxDataSources.git", exact: "5.0.2")
     ],
     targets: [
+        .target(name: "AppDesign"),
+        
         .target(name: "Extensions"),
         
         .target(name: "RxExtensions", dependencies: [
@@ -82,7 +85,8 @@ let package = Package(
         .target(name: "SharedViews", dependencies: [
             "Extensions",
             "SnapKit",
-            "Animators"
+            "Animators",
+            "AppDesign"
         ]),
         
         .target(name: "Animators"),
@@ -98,6 +102,7 @@ let package = Package(
             "RxDataSources",
             "SharedViews",
             "RxExtensions",
+            "AppDesign",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ]),
@@ -112,6 +117,7 @@ let package = Package(
             "SharedViews",
             "RxExtensions",
             "SDWebImage",
+            "AppDesign",
             .product(name: "RxSwift", package: "RxSwift"),
             .product(name: "RxCocoa", package: "RxSwift")
         ])
