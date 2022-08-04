@@ -59,8 +59,9 @@ public final class PeopleViewController: UIViewController, View, ViewSettableTyp
 
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        recalculateLayout(contentWidth: collectionView.contentSize.width)
-        
+        DispatchQueue.main.async {
+            self.recalculateLayout(contentWidth: self.collectionView.contentSize.width)
+        }
     }
     
     // MARK: - Setup
@@ -142,7 +143,7 @@ private extension PeopleViewController {
         
         let newItemSize = CGSize(width: itemWidth, height: 10)
         
-        guard viewLayout.itemSize != newItemSize ||
+        guard viewLayout.estimatedItemSize != newItemSize ||
                 viewLayout.minimumInteritemSpacing != itemSpace ||
                 viewLayout.minimumLineSpacing != lineSpace else {
             return
