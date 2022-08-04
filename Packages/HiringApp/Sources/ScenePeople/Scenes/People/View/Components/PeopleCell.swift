@@ -74,7 +74,7 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         container.layer.cornerRadius = 10
         
         roundedContainer.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.7960784314, blue: 0.7647058824, alpha: 1)
-        roundedContainer.layer.borderWidth = 1
+        roundedContainer.layer.borderWidth = 2
         roundedContainer.layer.borderColor = UIColor.clear.cgColor
         roundedContainer.layer.cornerRadius = 10
         roundedContainer.layer.shadowOffset = .init(width: 4, height: 4)
@@ -100,6 +100,8 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         avatarImageView.contentMode = .scaleAspectFit
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = 35
+        avatarImageView.layer.borderWidth = 2
+        avatarImageView.layer.borderColor = UIColor.clear.cgColor
         
         imageLoadingIndicator.hidesWhenStopped = true
         
@@ -181,6 +183,8 @@ extension PeopleCell {
         jobTitleLabel.text = model.jobTitle
         emailLabel.text = model.email
         imageLoadingIndicator.startAnimating()
+        avatarImageView.layer.borderColor = model.favoriteColor.flatMap { Colors.NamedColors(rawValue: $0) }?.color.cgColor
+        
         let url = model.avatarLink.flatMap { URL(string: $0) }
         url.map {
             avatarImageView.sd_setImage(with: $0) { image, error, _, url in
