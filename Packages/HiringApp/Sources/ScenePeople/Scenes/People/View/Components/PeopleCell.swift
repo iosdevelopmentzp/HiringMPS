@@ -46,6 +46,10 @@ final class PeopleCell: DynamicCollectionCell, Reusable, ViewSettableType {
         
         roundedContainer.backgroundColor = #colorLiteral(red: 0.768627451, green: 0.7960784314, blue: 0.7647058824, alpha: 1)
         roundedContainer.layer.cornerRadius = 10
+        roundedContainer.layer.shadowOffset = .init(width: 4, height: 4)
+        roundedContainer.layer.shadowColor = UIColor.gray.cgColor
+        roundedContainer.layer.shadowRadius = 2
+        roundedContainer.layer.shadowOpacity = 0.3
         
         fullNameLabel.textColor = .black
         fullNameLabel.font = .systemFont(ofSize: 20)
