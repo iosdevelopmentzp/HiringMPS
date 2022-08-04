@@ -35,12 +35,8 @@ public final class PeopleViewController: UIViewController, View, ViewSettableTyp
     
     private let retrySubject = PublishSubject<Void>()
     
-    private var layoutMode: LayoutMode = .singleColumn {
-        didSet {
-            guard layoutMode != oldValue else { return }
-            recalculateLayout()
-        }
-    }
+    private var currentSectionType: PeopleSection.SectionType = .single
+    private var layoutMode: LayoutMode = .singleColumn
     
     // MARK: - Constructor
     
@@ -60,10 +56,11 @@ public final class PeopleViewController: UIViewController, View, ViewSettableTyp
         performSetupViews()
         setupOutput()
     }
-    
+
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        recalculateLayout()
+        recalculateLayout(contentWidth: collectionView.contentSize.width)
+        
     }
     
     // MARK: - Setup
@@ -115,22 +112,32 @@ private extension PeopleViewController {
     private func setupDataSourceObserving(with input: Driver<PeopleState>) -> Disposable {
         input
             .map(PeopleSection.Factory.make(_:))
+            .do(onNext: { [weak self] in
+                // Update collection layout depends on section type
+                $0.first.map {
+                    guard let self = self else { return }
+                    self.currentSectionType = $0.type
+                    self.recalculateLayout(contentWidth: self.collectionView.contentSize.width)
+                }
+            })
             .drive(collectionView.rx.items(dataSource: dataSource()))
     }
     
-    private func recalculateLayout() {
+    private func recalculateLayout(contentWidth: CGFloat) {
+        updateLayoutMode(for: currentSectionType)
+        
         let itemWidth: CGFloat
         let itemSpace: CGFloat
         let lineSpace: CGFloat = 10
         
         switch layoutMode {
         case .singleColumn:
-            itemWidth = collectionView.bounds.width
+            itemWidth = contentWidth
             itemSpace = 0
             
         case .dualColumn:
-            itemSpace = 10
-            itemWidth = (collectionView.bounds.width / 2) - itemSpace
+            itemSpace = 0
+            itemWidth = (contentWidth / 2) - itemSpace
         }
         
         let newItemSize = CGSize(width: itemWidth, height: 10)
@@ -140,10 +147,26 @@ private extension PeopleViewController {
                 viewLayout.minimumLineSpacing != lineSpace else {
             return
         }
+        
         viewLayout.estimatedItemSize = newItemSize
         viewLayout.minimumLineSpacing = lineSpace
         viewLayout.minimumInteritemSpacing = itemSpace
         viewLayout.invalidateLayout()
+    }
+    
+    private func updateLayoutMode(for sectionType: PeopleSection.SectionType) {
+        let contentWidth = collectionView.contentSize.width
+        
+        switch sectionType {
+        case .single:
+            layoutMode = .singleColumn
+            
+        case .main where contentWidth > 500:
+            layoutMode = .dualColumn
+            
+        case .main:
+            layoutMode = .singleColumn
+        }
     }
 }
 
