@@ -79,8 +79,8 @@ private extension PeopleViewModel {
         return useCase
             .setupPeople()
             .asObservable()
-            .map { rooms -> PeopleState in
-                return .loaded(models: rooms.map(PeopleCellModel.Factory.make(from:)))
+            .map { people -> PeopleState in
+                return .loaded(models: people.sorted().map(PeopleCellModel.Factory.make(from:)))
             }
             .catch { .just(.error($0.localizedDescription)) }
     }
